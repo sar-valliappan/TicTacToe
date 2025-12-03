@@ -1,4 +1,5 @@
 #include <iostream>
+#include <random>
 
 void print_board(char board[3][3]) {
     for (int i = 0; i < 3; i++) {
@@ -32,7 +33,17 @@ bool check_win(char board[3][3], char player) {
 }
 
 void computer_move(char board[3][3]) {
-    
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 2);
+    int row = dis(gen);
+    int col = dis(gen);
+    while (board[row][col] != ' ') {
+        row = dis(gen);
+        col = dis(gen);
+    }
+    board[row][col] = 'O';
+    check_win(board, 'O');
 }
 
 void game(char board[3][3], char choice) {
