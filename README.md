@@ -1,4 +1,4 @@
-# Tic Tac Toe (C++) — Minimax AI
+# Tic Tac Toe (C++) — Minimax
 
 This project is a fully interactive **Tic Tac Toe game written in C++**, featuring:
 
