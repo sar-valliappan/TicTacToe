@@ -39,6 +39,46 @@ bool is_tied(char board[3][3]) {
     return true;
 }
 
+void easy_move(char board[3][3]) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 8);
+    int row = dis(gen) / 3;
+    int col = dis(gen) % 3;
+    while (board[row][col] != ' ') {
+        row = dis(gen) / 3;
+        col = dis(gen) % 3;
+    }
+    board[row][col] = 'O';
+}
+
+void medium_move(char board[3][3]) {
+    // Center
+    if (board[1][1] == ' ') {
+        board[1][1] = 'O';
+    }
+    // Corners
+    else if (board[0][0] == ' ') {
+        board[0][0] = 'O';
+    } else if (board[0][2] == ' ') {
+        board[0][2] = 'O';
+    } else if (board[2][0] == ' ') {
+        board[2][0] = 'O';
+    } else if (board[2][2] == ' ') {
+        board[2][2] = 'O';
+    }
+    // Edges 
+    else if (board[0][1] == ' ') {
+        board[0][1] = 'O';
+    } else if (board[1][0] == ' ') {
+        board[1][0] = 'O';
+    } else if (board[1][2] == ' ') {
+        board[1][2] = 'O';
+    } else if (board[2][1] == ' ') {
+        board[2][1] = 'O';
+    } 
+}
+
 int minimax(char board[3][3], bool isMaximizing) {
     if (check_win(board, 'X')) return -10;
     if (check_win(board, 'O')) return 10;
@@ -71,7 +111,7 @@ int minimax(char board[3][3], bool isMaximizing) {
     }
 }
 
-void computer_move(char board[3][3]) {
+void hard_move(char board[3][3]) {
     int bestVal = std::numeric_limits<int>::min();
     int bestRow = -1;
     int bestCol = -1;
@@ -96,6 +136,12 @@ void computer_move(char board[3][3]) {
 void game(char board[3][3], char choice) {
     char player = 'X';
     int row, col;
+    int difficulty = 0;
+    if (choice == 'y') {
+        std::cout << "What difficulty would you like to play? (1-3): ";
+        int difficulty;
+        std::cin >> difficulty;
+    }
     while (true) {
         std::cout << "Player " << player << ", enter a row and column (1-3) to place your mark. Separated by a space: ";
         std::cin >> row >> col;
@@ -139,7 +185,13 @@ void game(char board[3][3], char choice) {
             }
         }
         if (choice == 'y') {
-            computer_move(board);
+            if (difficulty == 1) {
+                easy_move(board);
+            } else if (difficulty == 2) {
+                medium_move(board);
+            } else if (difficulty == 3) {
+                hard_move(board);
+            }
             std::cout << "Computer's move:\n";
             print_board(board);
             if (check_win(board, 'O')) {
