@@ -31,17 +31,13 @@ bool check_win(char board[3][3], char player) {
     return false;
 }
 
-int main() {
-    char board[3][3];
+void computer_move(char board[3][3]) {
+    
+}
+
+void game(char board[3][3], char choice) {
     char player = 'X';
     int row, col;
-    
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            board[i][j] = ' ';
-        }
-    }
-
     while (true) {
         print_board(board);
         std::cout << "Player " << player << ", enter a row and column (0-2) to place your mark. Separated by a space: ";
@@ -56,16 +52,38 @@ int main() {
             std::cout << "That space is already taken! Try again.";
             continue;
         }
+
         board[row][col] = player;
         check_win(board, player);
-
-        switch (player) {
+        if (choice == 'n') {
+            switch (player) {
             case 'X':
                 player = 'O';
                 break;
             case 'O':
                 player = 'X';
                 break;
+            }
+        }
+        if (choice == 'y') {
+            computer_move(board);
         }
     }
+}
+
+int main() {
+    char board[3][3];
+    int row, col;
+    
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            board[i][j] = ' ';
+        }
+    }
+
+    std::cout << "Welcome to Tic Tac Toe!\n";
+    std::cout << "Would you like to play against the computer? (y/n): ";
+    char choice;
+    std::cin >> choice;
+    game(board, choice);
 }
