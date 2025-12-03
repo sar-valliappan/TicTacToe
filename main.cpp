@@ -47,6 +47,15 @@ int main() {
         std::cout << "Player " << player << ", enter a row and column (0-2) to place your mark. Separated by a space: ";
         std::cin >> row >> col;
 
+        if (row < 0 || row > 2 || col < 0 || col > 2) {
+            std::cout << "Invalid move! Try again.";
+            continue;
+        }
+
+        if (board[row][col] != ' ') {
+            std::cout << "That space is already taken! Try again.";
+            continue;
+        }
         board[row][col] = player;
         check_win(board, player);
 
