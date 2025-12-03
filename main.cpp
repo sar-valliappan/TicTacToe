@@ -97,8 +97,16 @@ void game(char board[3][3], char choice) {
     char player = 'X';
     int row, col;
     while (true) {
-        std::cout << "Player " << player << ", enter a row and column (0-2) to place your mark. Separated by a space: ";
+        std::cout << "Player " << player << ", enter a row and column (1-3) to place your mark. Separated by a space: ";
         std::cin >> row >> col;
+        if (std::cin.fail()) {
+            std::cout << "Not an integer! Try again.\n";
+            std::cin.clear();            
+            std::cin.ignore(1000, '\n'); 
+            continue;
+        }
+        row--;
+        col--;
 
         if (row < 0 || row > 2 || col < 0 || col > 2) {
             std::cout << "Invalid move! Try again.";
@@ -160,5 +168,9 @@ int main() {
     std::cout << "Would you like to play against the computer? (y/n): ";
     char choice;
     std::cin >> choice;
+    if (choice != 'y' && choice != 'n') {
+        std::cout << "Invalid choice! Defaulting to human vs. human.\n";
+        choice = 'n';
+    }
     game(board, choice);
 }
