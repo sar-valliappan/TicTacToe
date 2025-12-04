@@ -4,8 +4,9 @@ This project is a fully interactive **Tic Tac Toe game written in C++**, featuri
 
 - A clean, text-based game board  
 - Human vs. Human mode  
-- Human vs. Computer mode  
+- Human vs. Computer mode, with varying difficulties  
 - A **perfect opponent** implemented using the **Minimax algorithm**  
+- A **horrible opponent** impelemented using **random number generation**
 - Input validation and error handling  
 
 This was the first program I built while learning C++, and it helped me understand fundamental concepts like arrays, functions, recursion, and algorithmic decision-making.
@@ -17,12 +18,19 @@ This was the first program I built while learning C++, and it helped me understa
 ### Human vs. Human  
 Players take turns entering positions on the board.
 
-### Human vs. Computer  
+### Human vs. Computer
+#### Hardest Difficulty  
 The computer plays perfectly using **Minimax**, meaning it:
 
 - Never loses  
 - Always chooses the optimal move  
 - Forces a tie when it cannot win  
+
+#### Medium Difficulty
+The computer uses a preset order to move, starting with the center, then corners, then edges.
+
+#### Easy Difficulty
+The computer picks random squares.
 
 ### Game Logic  
 Includes:
@@ -37,6 +45,6 @@ Includes:
 ## Technologies Used
 
 - **C++17**
-- Standard library: `<iostream>`, `<random>` (a previous version where the computer played random moves)
+- Standard library: `<iostream>`, `<random>`
 
 ---
