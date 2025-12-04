@@ -139,7 +139,6 @@ void game(char board[3][3], char choice) {
     int difficulty = 0;
     if (choice == 'y') {
         std::cout << "What difficulty would you like to play? (1-3): ";
-        int difficulty;
         std::cin >> difficulty;
     }
     while (true) {
